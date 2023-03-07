@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from .views import submit, show_exam_result
 
 app_name = 'onlinecourse'
 urlpatterns = [
@@ -18,7 +19,9 @@ urlpatterns = [
     path('<int:course_id>/enroll/', views.enroll, name='enroll'),
 
     # <HINT> Create a route for submit view
+    path('<int:course_id>/submit/', submit, name='submit'),
 
     # <HINT> Create a route for show_exam_result view
+    path('<int:course_id>/submissions/<int:submission_id>/result/', views.show_exam_result, name='show_exam_result'),
 
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

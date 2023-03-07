@@ -57,6 +57,7 @@ class Course(models.Model):
     name = models.CharField(null=False, max_length=30, default='online course')
     image = models.ImageField(upload_to='course_images/')
     description = models.CharField(max_length=1000)
+    passing_grade = models.FloatField(default=80) 
     pub_date = models.DateField(null=True)
     instructors = models.ManyToManyField(Instructor)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Enrollment')
@@ -138,5 +139,5 @@ class Choice(models.Model):
 # One choice could belong to multiple submissions
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
-    chocies = models.ManyToManyField(Choice)
+    choices = models.ManyToManyField(Choice)
 #    Other fields and methods you would like to design
